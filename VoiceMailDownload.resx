@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+<!--
+
+VoiceMailDownload, a utility to download voice mail from the GalaxyVoice.Com service.
+
+    Copyright (C) 2007 George j. Carrette
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+ <resheader name="resmimetype">
+  <value>text/microsoft-resx</value>
+ </resheader>
+ <resheader name="version">
+  <value>2.0</value>
+ </resheader>
+ <resheader name="reader">
+  <value>System.Resources.ResXResourceReader</value>
+ </resheader>
+ <resheader name="writer">
+  <value>System.Resources.ResXResourceWriter</value>
+ </resheader>
+
+ <data name="gpl-3.0.txt" type="System.Resources.ResXFileRef">
+  <value>gpl-3.0.txt;System.String</value>
+ </data>
+
+ <data name="VoiceMailDownload.cs" type="System.Resources.ResXFileRef">
+  <value>VoiceMailDownload.cs;System.String</value>
+ </data>
+ <data name="VoiceMailDownload.resx" type="System.Resources.ResXFileRef">
+  <value>VoiceMailDownload.resx;System.String</value>
+ </data>
+ <data name="VoiceMailDownload.csproj" type="System.Resources.ResXFileRef">
+  <value>VoiceMailDownload.csproj;System.String</value>
+ </data>
+ <data name="VoiceMailDownload.AssemblyInfo.cs" type="System.Resources.ResXFileRef">
+  <value>VoiceMailDownload.AssemblyInfo.cs;System.String</value>
+ </data>
+ <data name="sourcefilenames" type="System.String">
+  <value>
+VoiceMailDownload.cs
+VoiceMailDownload.resx
+VoiceMailDownload.csproj
+VoiceMailDownload.AssemblyInfo.cs
+  </value>
+ </data>
+
+ <data name="helpstr" type="System.String">
+  <value>
+VoiceMailDownload [-debug false] [-test file.html] [-log filename.txt]
+[-user xxx] [-pass xxx] [-url http://myaccount.galaxyvoice.com/] 
+[-path c:/Documents and Settings/All Users/Documents/VoiceMail/]
+[-show w] [-show c] [-show s] [-show h] [-pause false]
+
+The -log filename may have the token TIMESTAMP in it, which will be
+converted into a YYYY-mm-ddTHH-MM-SS value based on the current time.
+
+-pause true will cause the utility to prompt for a [ENTER] response
+before exiting.
+
+-path is where the voice mail files are downloaded to.
+
+</value>
+ </data>
+
+ <data name="copyrightmsg" type="System.String">
+  <value>
+          VoiceMailDownload  Copyright (C) 2007 George J. Carrette
+    This program comes with ABSOLUTELY NO WARRANTY; for details type -show w.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; type -show c for details.
+    For source code type -show s, for help -show h.
+</value>
+ </data>
+
+ <data name="download_path" type="System.String">
+  <value>c:/Documents and Settings/All Users/Documents/VoiceMail/</value>
+ </data>
+
+ <data name="voicemail_url"><value>http://myaccount.galaxyvoice.com/</value></data>
+
+</root>
