@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-<!--
-
+ <data name="copyrightheader">
+  <value><![CDATA[
 VoiceMailDownload, a utility to download voice mail from the GalaxyVoice.Com service.
 
     Copyright (C) 2007 George j. Carrette
@@ -18,8 +18,8 @@ VoiceMailDownload, a utility to download voice mail from the GalaxyVoice.Com ser
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
--->
+    ]]></value>
+ </data>
 
  <resheader name="resmimetype">
   <value>text/microsoft-resx</value>
@@ -92,5 +92,15 @@ before exiting.
  </data>
 
  <data name="voicemail_url"><value>http://myaccount.galaxyvoice.com/</value></data>
+ <data name="voiceplayer_fmt">
+  <value><![CDATA[voiceplayer.cgi?playmessage=y&box={0}&message={1}]]></value>
+ </data>
+ <data name="RECLSTART">
+  <value><![CDATA[<!-- ### Beginning Of Records ### -->]]></value>
+ </data>
+ <data name="RECLEND">
+  <value><![CDATA[<!-- ### End Of Records ### -->]]></value>
+ </data>
+ <data name="voicemail_fmt"><value>voicemail.cgi</value></data>
 
 </root>
