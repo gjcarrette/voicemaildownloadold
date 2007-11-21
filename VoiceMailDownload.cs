@@ -28,6 +28,8 @@ using System.Net;
 using System.Diagnostics;
 using System.Resources;
 using System.Reflection;
+using System.Globalization;
+
 
 namespace VoiceMailDownload
 {
@@ -39,8 +41,13 @@ namespace VoiceMailDownload
     public string test_filename = null;
     public string show_flag = null;
     public ResourceManager rm = null;
-    public string RECLSTART = "<!-- ### Beginning Of Records ### -->";
-    public string RECLEND = "<!-- ### End Of Records ### -->";
+    public string RECLSTART = null;
+    public string RECLEND = null;
+    public string voiceplayer_fmt = null;
+    public string voicemail_fmt = null;
+
+
+
     
     public string download_path = null;
     
@@ -154,6 +161,12 @@ namespace VoiceMailDownload
             msg(copyleft);
           return;
         }
+
+      RECLSTART = getstring("RECLSTART");
+      RECLEND = getstring("RECLEND");
+      voiceplayer_fmt = getstring("voiceplayer_fmt");
+      voicemail_fmt = getstring("voicemail_fmt");
+      
       msg("Starting at " + DateTime.Now);
       List<voicemsg> l = get_voicemsg_list();
       msg("There are " + l.Count + " voice messages on the server");
@@ -178,9 +191,7 @@ namespace VoiceMailDownload
     {
       Stopwatch sw = new Stopwatch();
       sw.Start();
-      string url = "voiceplayer.cgi?playmessage=y" +
-        "&box=" + m.boxname +
-        "&message=" + m.filename;
+      string url = String.Format(voiceplayer_fmt,m.boxname,m.filename);
       HttpWebRequest req = getrequest(url);
       HttpWebResponse res  = (HttpWebResponse) req.GetResponse();
       int nbytes = 0;
@@ -210,7 +221,13 @@ namespace VoiceMailDownload
           File.Move(local_pathname + ".tmp",local_pathname);
         }
       sw.Stop();
-      msg(nreads + " reads to get " + nbytes + " in " + sw.Elapsed);
+      msg(nreads + " reads to get " + nbytes + " in " + sw.Elapsed +
+          " " +
+          ((sw.ElapsedMilliseconds > 0)
+           ? ((nbytes*1000)/sw.ElapsedMilliseconds).ToString()
+           : "0")
+          +
+          " bytes per second");
     }
     
     string substr(string str,string key1,string key2,bool inner,bool ex)
@@ -298,7 +315,7 @@ namespace VoiceMailDownload
       else
         {
           msg("Contacting server " + voicemail_url);
-          HttpWebRequest req = getrequest("voicemail.cgi");
+          HttpWebRequest req = getrequest(String.Format(voicemail_fmt));
           HttpWebResponse res  = (HttpWebResponse) req.GetResponse();
           Stream res_stream = res.GetResponseStream();
           string res_text = (new StreamReader(res_stream)).ReadToEnd();
@@ -411,18 +428,35 @@ namespace VoiceMailDownload
       public string timestamp = null;
       public string duration = null;
       public string size = null;
-      
-      public string LocalFileName()
+
+      public static string clean1(string s)
       {
-        string tmp = title + "-" + timestamp + ".wav";
-        tmp = tmp.Replace("\"","");
+        string tmp = s.Replace("\"","");
         tmp = tmp.Replace("<","");
         tmp = tmp.Replace(">","");
         tmp = tmp.Replace("  "," ");
+        tmp = tmp.Replace("  "," ");
+        tmp = tmp.Trim();
         tmp = tmp.Replace(" ","-");
         tmp = tmp.Replace(":","-");
         tmp = tmp.Replace(",","-");
         return(tmp);
+      }
+      
+      public string LocalFileName()
+      {
+
+        // Mon Nov 19 11:39:13 2007
+        string[] expectedFormats =  {"ddd MMM d H:m:s yyyy"};
+        CultureInfo culture = new CultureInfo("en-US", true);
+        DateTime ts = DateTime.ParseExact(timestamp,
+                                          expectedFormats,
+                                          culture,
+                                          DateTimeStyles.AllowWhiteSpaces);
+        return(ts.ToString("s").Replace("T","").Replace(":","").Replace("-","") +
+               "-" + clean1(title) +
+               "-" + clean1(timestamp) +
+               ".wav");
       }
     }
   }
