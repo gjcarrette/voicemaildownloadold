@@ -440,6 +440,9 @@ namespace VoiceMailDownload
         tmp = tmp.Replace(" ","-");
         tmp = tmp.Replace(":","-");
         tmp = tmp.Replace(",","-");
+        tmp = tmp.Replace("/", "-");
+        tmp = tmp.Replace("\\", "-");
+
         return(tmp);
       }
       
